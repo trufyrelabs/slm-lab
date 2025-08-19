@@ -1,0 +1,109 @@
+# SLM-Lab: Requirements for Small Language Model Fine-tuning and Deployment
+# ========================================================================
+#
+# This file contains all the Python dependencies needed to run the SLM-Lab
+# toolkit for fine-tuning, optimizing, and deploying Small Language Models.
+#
+# Installation:
+#   pip install -r requirements.txt
+#
+# For GPU support, ensure you have:
+# - NVIDIA GPU with CUDA support
+# - Compatible CUDA drivers installed
+# - PyTorch with CUDA support
+
+# Core ML libraries
+torch>=2.0.0                    # PyTorch for deep learning
+transformers>=4.41.0            # Hugging Face Transformers for model loading and training
+datasets>=2.14.0                # Hugging Face Datasets for data loading
+accelerate>=0.21.0              # Hugging Face Accelerate for distributed training
+
+# Parameter-efficient fine-tuning
+peft>=0.5.0                     # Parameter-Efficient Fine-Tuning (LoRA, QLoRA)
+bitsandbytes>=0.41.0            # 8-bit and 4-bit quantization for memory efficiency
+
+# Training and optimization
+trl>=0.7.0                      # Transformer Reinforcement Learning (optional)
+optimum>=1.13.0                 # Hugging Face Optimum for model optimization
+optimum[onnxruntime]>=1.13.0    # ONNX Runtime support for model export
+
+# ONNX and deployment
+onnx>=1.14.0                    # Open Neural Network Exchange format
+onnxruntime>=1.15.0             # ONNX Runtime for model inference
+onnxruntime-gpu>=1.15.0         # GPU support for ONNX Runtime
+
+# Web server and API
+fastapi>=0.100.0                # FastAPI for creating REST APIs
+uvicorn[speed]>=0.23.0          # ASGI server for FastAPI
+pydantic>=2.0.0,<3.0.0          # Data validation for FastAPI
+
+# Utilities
+einops>=0.7.0                   # Einstein notation for tensor operations
+safetensors>=0.3.0              # Safe tensor serialization
+numpy>=1.24.0                   # Numerical computing
+tqdm>=4.65.0                    # Progress bars
+
+# Optional: Additional tools for advanced usage
+# jupyter>=1.0.0                # Jupyter notebooks for experimentation
+# wandb>=0.15.0                 # Weights & Biases for experiment tracking
+# tensorboard>=2.13.0           # TensorBoard for training visualization
+# scikit-learn>=1.3.0           # Machine learning utilities for evaluation
+
+# ============================================================================
+# INSTALLATION NOTES
+# ============================================================================
+#
+# 1. Basic installation (CPU only):
+#    pip install -r requirements.txt
+#
+# 2. GPU installation (recommended):
+#    # First install PyTorch with CUDA support
+#    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+#    # Then install other requirements
+#    pip install -r requirements.txt
+#
+# 3. Development installation:
+#    pip install -r requirements.txt
+#    pip install -e .  # If this package becomes installable
+#
+# 4. Minimal installation (for inference only):
+#    pip install torch transformers peft fastapi uvicorn
+#
+# ============================================================================
+# VERSION COMPATIBILITY
+# ============================================================================
+#
+# These versions are tested and compatible:
+# - Python 3.10+
+# - CUDA 11.8+ (for GPU support)
+# - PyTorch 2.0+
+# - Transformers 4.41+
+#
+# For specific hardware or use cases, you may need to adjust versions:
+# - Older GPUs: Use older CUDA/PyTorch versions
+# - Newer hardware: Use latest versions for best performance
+# - Production: Pin exact versions for reproducibility
+#
+# ============================================================================
+# TROUBLESHOOTING
+# ============================================================================
+#
+# Common installation issues:
+#
+# 1. bitsandbytes installation fails:
+#    - Ensure you have a compatible GPU
+#    - Try: pip install bitsandbytes --upgrade --force-reinstall
+#
+# 2. CUDA version mismatch:
+#    - Check your CUDA version: nvidia-smi
+#    - Install matching PyTorch version
+#
+# 3. Memory issues during training:
+#    - Reduce batch size or sequence length
+#    - Use QLoRA instead of LoRA
+#    - Close other GPU applications
+#
+# 4. Import errors:
+#    - Ensure all packages are installed: pip list
+#    - Check Python version compatibility
+#    - Try creating a fresh virtual environment
